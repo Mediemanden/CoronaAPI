@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoronaAPI", ".\CoronaAPI\Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoronaAPI.Service", "CoronaAPI.Service\CoronaAPI.Service.csproj", "{E1083D94-6352-45DD-A716-101315E8FC34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoronaAPI.Repository", "CoronaAPI.Repository\CoronaAPI.Repository.csproj", "{AFB871B0-99E4-45D7-A0C8-FD9DD67E318A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E1083D94-6352-45DD-A716-101315E8FC34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1083D94-6352-45DD-A716-101315E8FC34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1083D94-6352-45DD-A716-101315E8FC34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFB871B0-99E4-45D7-A0C8-FD9DD67E318A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFB871B0-99E4-45D7-A0C8-FD9DD67E318A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFB871B0-99E4-45D7-A0C8-FD9DD67E318A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFB871B0-99E4-45D7-A0C8-FD9DD67E318A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

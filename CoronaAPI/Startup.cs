@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -6,7 +7,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using CoronaAPI.Service.Interfaces;
 using CoronaAPI.Service;
-using Microsoft.Extensions.Logging;
+using CoronaAPI.Repository.Interfaces;
+using CoronaAPI.Repository;
 
 namespace CoronaAPI
 {
@@ -28,6 +30,12 @@ namespace CoronaAPI
             
             // DI 
             services.AddTransient<ICoronaDataHandler, CoronaDataHandler>();
+            services.AddTransient<IHttpCoronaDataFetcher, HttpCoronaDataFetcher>();
+
+            services.AddHttpClient<IHttpCoronaDataFetcher, HttpCoronaDataFetcher>(client =>
+            {
+                client.BaseAddress = new Uri(Constants.OpenDataECDCUrl);
+            });
             
             // Swagger
             services.AddSwaggerGen(c =>
