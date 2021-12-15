@@ -1,4 +1,5 @@
 using System;
+using CoronaAPI.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -36,6 +37,9 @@ namespace CoronaAPI
             {
                 client.BaseAddress = new Uri(Constants.OpenDataECDCUrl);
             });
+            
+            // Automapper
+            services.ConfigureAutomapper();
             
             // Swagger
             services.AddSwaggerGen(c =>

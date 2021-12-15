@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using CoronaAPI.Repository.Interfaces;
 using CoronaAPI.Service.Interfaces;
 using CoronaAPI.Service.Models;
@@ -12,17 +13,21 @@ namespace CoronaAPI.Service
     {
         public readonly ILogger<CoronaDataHandler> _logger;
         public readonly IHttpCoronaDataFetcher _coronaDataHandler;
+        public readonly IMapper _mapper;
 
-        public CoronaDataHandler(ILogger<CoronaDataHandler> logger, IHttpCoronaDataFetcher coronaDataHandler)
+        public CoronaDataHandler(ILogger<CoronaDataHandler> logger, IHttpCoronaDataFetcher coronaDataHandler, IMapper mapper)
         {
             _logger = logger;
             _coronaDataHandler = coronaDataHandler;
+            _mapper = mapper;
         }
 
         public async Task<List<CoronaReportModel>> GetCoronaReports(string countryCode)
         {
             _logger.LogInformation("Returning data for country {CountryCode}", countryCode);
             var temp = await _coronaDataHandler.GetCoronaReportsByCountry(countryCode);
+            var hello = _mapper.Map<List<CoronaReportModel>>(temp);
+            
             return Builder<CoronaReportModel>.CreateListOfSize(5).Build() as List<CoronaReportModel>;
         }
     }
