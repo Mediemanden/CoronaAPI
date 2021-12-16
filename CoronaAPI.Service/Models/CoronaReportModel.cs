@@ -4,7 +4,7 @@ namespace CoronaAPI.Service.Models
 {
     public class CoronaReportModel
     {
-        public string Date { get; set; }
+        public DateTime Date { get; set; }
         public string Country { get; set; }
         public int Cases { get; set; }
         public int Deaths { get; set; }

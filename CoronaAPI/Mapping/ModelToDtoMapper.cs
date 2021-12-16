@@ -8,7 +8,9 @@ namespace CoronaAPI.Mapping
     {
         public ModelToDtoMapper()
         {
-            CreateMap<CoronaReportModel, CoronaReportDto>();
+            CreateMap<CoronaReportModel, CoronaReportDto>()
+                .ForMember(dest => dest.Date,
+                    src => src.MapFrom(x => x.Date.ToString("dd/MM/yyyy")));
         }
     }
 }

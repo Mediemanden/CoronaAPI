@@ -4,7 +4,7 @@ namespace CoronaAPI.Dto
 {
     public class CoronaReportDto
     {
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
         public string Country { get; set; }
         public int Cases { get; set; }
         public int Deaths { get; set; }

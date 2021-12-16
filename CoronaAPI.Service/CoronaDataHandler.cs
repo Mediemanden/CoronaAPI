@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using CoronaAPI.Repository.Interfaces;
 using CoronaAPI.Service.Interfaces;
 using CoronaAPI.Service.Models;
-using FizzWare.NBuilder;
 using Microsoft.Extensions.Logging;
 
 namespace CoronaAPI.Service
@@ -22,14 +22,18 @@ namespace CoronaAPI.Service
             _mapper = mapper;
         }
 
-        public async Task<List<CoronaReportModel>> GetCoronaReports(string countryCode)
+        public async Task<List<CoronaReportModel>> GetCoronaReports(string countryCode, int limit = 5, int offset = 0)
         {
-            _logger.LogInformation("Returning data for country {CountryCode}", countryCode);
+            
             var reportEntities = await _coronaDataHandler.GetCoronaReportsByCountry(countryCode);
             
             var reportModels = _mapper.Map<List<CoronaReportModel>>(reportEntities);
 
-            return reportModels;
+            var result = reportModels.OrderByDescending(x => x.Date).Skip(offset).Take(limit).ToList();
+            
+            _logger.LogDebug("Returning reports for {DaysCount} days for country {CountryCode}", result.Count, countryCode);
+
+            return result;
         }
     }
 }
