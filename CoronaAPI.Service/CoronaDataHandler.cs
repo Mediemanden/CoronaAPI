@@ -25,10 +25,11 @@ namespace CoronaAPI.Service
         public async Task<List<CoronaReportModel>> GetCoronaReports(string countryCode)
         {
             _logger.LogInformation("Returning data for country {CountryCode}", countryCode);
-            var temp = await _coronaDataHandler.GetCoronaReportsByCountry(countryCode);
-            var hello = _mapper.Map<List<CoronaReportModel>>(temp);
+            var reportEntities = await _coronaDataHandler.GetCoronaReportsByCountry(countryCode);
             
-            return Builder<CoronaReportModel>.CreateListOfSize(5).Build() as List<CoronaReportModel>;
+            var reportModels = _mapper.Map<List<CoronaReportModel>>(reportEntities);
+
+            return reportModels;
         }
     }
 }

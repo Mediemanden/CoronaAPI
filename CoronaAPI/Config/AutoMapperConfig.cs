@@ -1,4 +1,5 @@
 using AutoMapper;
+using CoronaAPI.Mapping;
 using CoronaAPI.Service.Mapping;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,6 +12,7 @@ namespace CoronaAPI.Config
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new EntityToModelMapper());
+                cfg.AddProfile(new ModelToDtoMapper());
             });
 
             serviceCollection.AddSingleton(config.CreateMapper());
