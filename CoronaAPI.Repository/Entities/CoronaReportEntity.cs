@@ -1,4 +1,4 @@
-using System.Text.Json.Serialization;
+using CoronaAPI.Repository.Enums;
 
 namespace CoronaAPI.Repository.Entities
 {
@@ -12,7 +12,7 @@ namespace CoronaAPI.Repository.Entities
         public int Deaths { get; set; }
         public string CountriesAndTerritories { get; set; }
         public string GeoId { get; set; }
-        public string CountryTerritoryCode { get; set; }
+        public CountryCode CountryTerritoryCode { get; set; }
         public string PopData2020 { get; set; }
         public string ContinentExp { get; set; }
     }

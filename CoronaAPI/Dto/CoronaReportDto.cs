@@ -1,4 +1,6 @@
-using System;
+using CoronaAPI.Repository.Enums;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace CoronaAPI.Dto
 {
@@ -8,6 +10,7 @@ namespace CoronaAPI.Dto
         public string Country { get; set; }
         public int Cases { get; set; }
         public int Deaths { get; set; }
-        public string CountryCode { get; set; } // Add enum for this
+        [JsonConverter(typeof(StringEnumConverter))]
+        public CountryCode CountryCode { get; set; } 
     }
 }

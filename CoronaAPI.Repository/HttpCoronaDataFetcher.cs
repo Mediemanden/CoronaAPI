@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CoronaAPI.Repository.Entities;
+using CoronaAPI.Repository.Enums;
 using CoronaAPI.Repository.Interfaces;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -22,7 +23,7 @@ namespace CoronaAPI.Repository
             _httpClient = httpClient;
         }
 
-        public async Task<List<CoronaReportEntity>> GetCoronaReportsByCountry(string countryCode)
+        public async Task<List<CoronaReportEntity>> GetAllCoronaReports()
         {
             var result = await _httpClient.GetAsync(CovidNationalCaseDeathDailyUrl);
 
@@ -34,9 +35,14 @@ namespace CoronaAPI.Repository
             }
             
             var contentString = await result.Content.ReadAsStringAsync();
-            var recordsEntity = JsonConvert.DeserializeObject<CoronaReportsEntity>(contentString);
+            return JsonConvert.DeserializeObject<CoronaReportsEntity>(contentString)?.Records;
+        }
+
+        public async Task<List<CoronaReportEntity>> GetCoronaReportsByCountry(CountryCode countryCode)
+        {
+            var records =  await GetAllCoronaReports();
             
-            return recordsEntity?.Records.Where(x => x.CountryTerritoryCode == countryCode).ToList();
+            return records?.Where(x => x.CountryTerritoryCode == countryCode).ToList();
         }
     }
 }

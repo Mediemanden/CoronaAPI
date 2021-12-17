@@ -6,8 +6,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using AutoMapper;
 using CoronaAPI.Dto;
+using CoronaAPI.Repository.Enums;
 using CoronaAPI.Service.Interfaces;
-using FizzWare.NBuilder;
 
 namespace CoronaAPI.Controllers
 {
@@ -27,13 +27,8 @@ namespace CoronaAPI.Controllers
         }
 
         [HttpGet("bycountry")]
-        public async Task<ActionResult<List<CoronaReportDto>>> GetReportsForCountry([Required] string countryCode, int limit = 5, int offset = 0)
+        public async Task<ActionResult<List<CoronaReportDto>>> GetReportsForCountry([Required] CountryCode countryCode, int limit = 5, int offset = 0)
         {
-            if (countryCode == null || String.IsNullOrEmpty(countryCode.Trim()))
-            {
-                return BadRequest("Invalid country code");
-            }
-
             if (limit < 0)
             {
                 return BadRequest("Limit must be zero or above");
@@ -52,7 +47,9 @@ namespace CoronaAPI.Controllers
         [HttpGet("totalcases")]
         public async Task<ActionResult<CoronaReportDto>> GetTotalCases()
         {
-            return Ok(Builder<CoronaReportDto>.CreateNew().Build());
+            _logger.LogDebug("Received request for total cases");
+            
+            return Ok(await _coronaDataHandler.GetTotalCoronaCases());
         }
     }
 }

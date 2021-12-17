@@ -1,0 +1,36 @@
+namespace CoronaAPI.Repository.Enums
+{
+    public enum CountryCode
+    {
+        AUT,
+        BEL,
+        BGR,
+        HRV,
+        CYP,
+        CZE,
+        DNK,
+        EST,
+        FIN,
+        FRA,
+        DEU,
+        GRC,
+        HUN,
+        ISL,
+        IRL,
+        ITA,
+        LVA,
+        LIE,
+        LTU,
+        LUX,
+        MLT,
+        NLD,
+        NOR,
+        POL,
+        PRT,
+        ROU,
+        SVK,
+        SVN,
+        ESP,
+        SWE
+    }
+}

@@ -10,6 +10,7 @@ using CoronaAPI.Service.Interfaces;
 using CoronaAPI.Service;
 using CoronaAPI.Repository.Interfaces;
 using CoronaAPI.Repository;
+using Newtonsoft.Json.Converters;
 
 namespace CoronaAPI
 {
@@ -27,7 +28,8 @@ namespace CoronaAPI
         {
 
             // Controllers
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson(options => options.SerializerSettings.Converters.Add(new StringEnumConverter()));
             
             // DI 
             services.AddTransient<ICoronaDataHandler, CoronaDataHandler>();
@@ -41,11 +43,13 @@ namespace CoronaAPI
             // Automapper
             services.ConfigureAutomapper();
             
+            // Json Serializer
+
             // Swagger
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CoronaAPI", Version = "v1" });
-            });
+            }).AddSwaggerGenNewtonsoftSupport();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
