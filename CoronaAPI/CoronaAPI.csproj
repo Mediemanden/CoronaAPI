@@ -5,6 +5,8 @@
     <UserSecretsId>78af0ace-cb04-440b-9922-1d9057a84c05</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn> <!-- Remove warnings of missing XML comment for publically visible types or members-->
   </PropertyGroup>
 
   <ItemGroup>

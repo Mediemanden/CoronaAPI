@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Reflection;
 using CoronaAPI.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -46,9 +48,13 @@ namespace CoronaAPI
             // Json Serializer
 
             // Swagger
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(options =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CoronaAPI", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "CoronaAPI", Version = "v1" });
+                
+                // Include XML comments in swagger UI;
+                var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
             }).AddSwaggerGenNewtonsoftSupport();
         }
 
